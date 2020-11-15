@@ -1,0 +1,325 @@
+:root{
+    --background-menu: #333;
+    --background-hover-link: gray;
+    --color-menu: #fff;
+}
+
+/* 
+    -Normalize ya trae este fragmento de codigo
+    body {
+        margin: 0;
+    } 
+
+*/
+
+/*
+    -Usamos el modelo de cajas border box
+*/
+
+html{
+    box-sizing: border-box;
+}
+
+/*
+    -Para que todos los elementos obtengan este box-sizing debemos
+    hacerlo mediante el señalador universal
+*/
+
+*,
+*::after,
+*::before{
+    box-sizing: inherit;
+}
+
+/*
+    -Agrego el tamaño de la fuente en el body, para usar la propiedad
+    rem y em correspondientemente
+    -Uso el estandar de 16px
+*/
+
+body{
+    font-size: 16px;
+}
+
+/*
+
+    -En CSS es importante no usar la etiqueta del elemento,
+    debemos usar lo que normalmente se usa en CSS, las clases
+    -Debemos especificar que propiedad de background vamos
+    a usar en este caso background-color
+    -Eliminare el background-color de .top-bar y si lo dare
+    al elemento completo, es decir, al nav-bar
+
+    div.top-bar {
+        background: #333;
+    }
+*/  
+
+/*
+    -Agrego el width al 100% para que tome el total del
+    ancho de la pagina web
+    -Agrego un height de 50px para que encaje con el tamaño
+    del menu en modo ventana de computadora
+*/
+
+.navbar{
+    width: 100%;
+    height: 3.125em; /*50 px*/
+    background-color: var(--background-menu);
+}
+
+
+/*  
+    -Las media query se deben colocar al final de la hoja
+    de estilos, ya que por cascada nos podrian dañar los
+    estilos.
+    -Existen 3 media query con la misma condición, cosa
+    que no es altamente recomendada, por lo cual se uniran
+    en una sola o se colocaran en otras media query según
+    sea la necesidad
+    -Leer linea 46 (Sobre el uso de clases)
+
+    @media screen and (min-width: 768px) {
+            div.top-bar {
+            display: none;
+        }
+    
+  } */
+  
+/*
+    -Leer linea 46 (Clases)
+    -Le damos a .icon-menu un height de 50px para que encaje con el menu
+    correctamente
+    -Dare un margin en vez de un padding, ya que creo que la propiedad
+    margin se adapta mejor a esta necesidad
+    -Agrego un width del mismo tamaño que el height para tener un efecto
+    con hover mas bonito
+*/
+
+  .icon-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3.125em; /* 50px*/
+    height: 3.125em; /* 50px*/
+    cursor: pointer;
+    margin-left: 1em;
+  }
+
+/*
+    -Leer linea 46 (Sobre clases en css)
+    -Leer linea 48 (Sobre el uso de background-color)
+*/
+  
+.icon-menu .icon-bar {
+    position: relative;
+    background-color: #fff;
+    width: 1.875em; /*30px*/
+    height: 0.25rem; /*4px*/
+    border-radius: 2px;
+}
+
+/*
+    -Agregare el after y before con "::" por 
+    costumbre 
+*/
+  
+  .icon-menu .icon-bar::after,
+  .icon-menu .icon-bar::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 1.875em; /*30px*/
+    height: 0.25em; /*4px*/
+    border-radius: 0.125em; /*2px*/
+    background-color: #fff;
+    top: -0.5em;
+  }
+  
+  .icon-menu .icon-bar::after {
+    top: 0.5em;
+  }
+  
+  /*
+    -leer linea 46 (Clases en css)
+    -Agregare la clase correspondiente menu
+    -Leer linea 48 (Background-color)
+    -Dejare el background-color ya que me ayudara con
+    la versión telefono
+    -Reseteare el ul en la hoja de estilos de normalize
+    linea 356
+    -Debemos agregar la transition de forma especifica y agregamos
+    el timing function ease para tener un efecto rapido en la mitad de la animación
+  */
+
+    .menu {
+    background-color: var(--background-menu);
+    position: relative;
+    left: -100%;
+    transition: left ease 0.3s;
+  /*
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    list-style: none; 
+  */
+  }
+
+  /*
+    -leer linea 46 (Clases en css)
+    -Quiero agregar un cursor pointer al li, para que sea
+    mas agradable a la vista
+  */
+
+  .menu .menu__list{
+    padding: 1em;
+    border-bottom: 1px solid #fff;
+    cursor: pointer;
+  } 
+  
+  .menu .menu__list .menu__link {
+    color: var(--color-menu);
+    text-decoration: none;
+  }
+  
+/*   
+  -Leer linea 73 (Media query)
+   
+    @media screen and (min-width: 768px) {
+        nav ul.menu {
+        display: flex;
+        justify-content: space-evenly;
+        left: 0;
+        }
+    }
+
+*/
+
+ /*
+    -Leer linea 46(Clases en css)
+    -Ya que esta clase solo la usaremos en js para obtener
+    el efecto, le pondre un nombre mas especifico.
+ */
+  
+  .show-menu {
+    left: 0;
+  }
+  
+  /* 
+
+    -Leer linea 46 (clases en css)
+    -Por mejor compresión de la hoja de estilos
+    subire este fragmento a un lugar mas cercano
+    a su padre e hijo.
+    ul li {
+        padding: 1em;
+        border-bottom: 1px solid #fff;
+    } 
+  */
+
+/*
+    -Usare los breakpoints de bootstrap
+    -Leer linea 46 (clases en css)
+    -Medida telefono 576px
+*/
+@media screen and (min-width: 576px) {
+/*    
+    -Eliminamos estas lineas ya que
+    esta clase no es necesaria, ademas
+    esta escrita de forma incorrecta por el
+    uso de elementos en vez de clases
+     div.top-bar {
+        display: none;
+    } 
+    */
+
+    /* 
+
+    -Eliminamos estas lineas ya que
+    debemos ocultar el icono cuando
+    estemos en modo computadora
+
+        .icon-menu{
+            display: none;
+        } 
+    */
+}
+
+/*
+    -Medida Tablets 768px
+*/
+@media screen and (min-width: 768px) {
+
+    /*
+        -leer linea 46 (Clases en css)
+        -Agregamos esta linea al modo computadora,
+        ya que el modo tablet debe tener el menu responsive
+
+        nav ul.menu {
+        display: flex;
+        justify-content: space-evenly;
+        left: 0;
+    }
+    */    
+
+}
+
+/*
+    -Medida Computadoras 992px
+*/  
+@media screen and (min-width: 992px) {
+
+    .navbar .icon-menu{
+        display: none;
+    }
+
+    .navbar .menu {
+        display: flex;
+        justify-content: space-evenly;
+        left: 0;
+    }
+
+    .menu .menu__list {
+        border-bottom: none;
+        text-transform: uppercase;
+    }
+
+    .menu .menu__list:hover{
+        background-color: var(--background-hover-link);
+    }
+
+    .menu .menu__list:hover .menu__link{
+        color: #000;
+    }
+
+   /*  
+    -Leer linea 46 (Clases en css)
+
+    ul li {
+      border-bottom: none;
+      text-transform: uppercase;
+    }
+    ul li:hover {
+      background: grey;
+    }
+    ul li:hover a {
+      color: #000;
+    } 
+    
+    */ 
+}
+  
+  /*  POR QUÉ NO SE APLICA ESTA CLASE 
+      -No se aplica, por la especificidad
+      tenemos que:
+      .menu__link : ya que es una clase tiene una especificidad de 10.
+      .menu .menu__list .menu__link (linea 181): Ya que tiene 3 clases tiene una
+      especificidad de 30
+      Por lo cual, el que tenga mayor especificidad es el que se mostrara en
+      pantalla, por eso el texto no se pinta de rojo 
+  */
+
+  .menu__link {
+    color: red;
+  }
